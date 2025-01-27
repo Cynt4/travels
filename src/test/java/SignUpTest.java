@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 public class SignUpTest {
     @Test
     public void signUp() {
+        String firstname = "Bartek";
+        String lastname = "Tester";
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
@@ -26,11 +28,17 @@ public class SignUpTest {
         driver.findElements(By.xpath("//a[text()='  Sign Up']"))
                 .get(1)
                 .click();
-        driver.findElement(By.name("firstname")).sendKeys("Bartek");
-        driver.findElement(By.name("lastname")).sendKeys("Tester");
+        driver.findElement(By.name("firstname")).sendKeys(firstname);
+        driver.findElement(By.name("lastname")).sendKeys(lastname);
         driver.findElement(By.name("phone")).sendKeys("+48 999999999");
-        driver.findElement(By.name("email")).sendKeys("test@test.com");
+        driver.findElement(By.name("email")).sendKeys("test@tesergrehyujtyret.pl");
+        driver.findElement(By.name("password")).sendKeys("test123");
+        driver.findElement(By.name("confirmpassword")).sendKeys("test123");
+        driver.findElement(By.xpath("//button[text()=' Sign Up']")).click();
 
+        WebElement heading = driver.findElement(By.className("RTL"));
+        Assert.assertTrue(heading.getText().contains(lastname));
+        Assert.assertEquals("Hi, " + firstname + " " + lastname, heading.getText());
 
     }
 
