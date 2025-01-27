@@ -18,14 +18,21 @@ public class SignUpTest {
         driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get("http://www.kurs-selenium.pl/demo/");
-        driver.findElements(By.xpath("//li[@id='li_account']"))
+        driver.findElements(By.xpath("//li[@id='li_myaccount']"))
                 .stream()
                 .filter(WebElement::isDisplayed)
                 .findFirst()
                 .ifPresent(WebElement::click);
-        driver.findElements(By.xpath("//a[@text()=' Sign Up"))
+        driver.findElements(By.xpath("//a[text()='  Sign Up']"))
                 .get(1)
                 .click();
+        driver.findElement(By.name("firstname")).sendKeys("Bartek");
+        driver.findElement(By.name("lastname")).sendKeys("Tester");
+        driver.findElement(By.name("phone")).sendKeys("+48 999999999");
+        driver.findElement(By.name("email")).sendKeys("test@test.com");
+
+
     }
+
 }
 
