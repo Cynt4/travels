@@ -15,6 +15,8 @@ public class SignUpTest {
     public void signUp() {
         String firstname = "Bartek";
         String lastname = "Tester";
+        int randomNumber = (int) (Math.random()*1000);
+        String email = "tester" + randomNumber + "@test.pl";
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
@@ -31,7 +33,7 @@ public class SignUpTest {
         driver.findElement(By.name("firstname")).sendKeys(firstname);
         driver.findElement(By.name("lastname")).sendKeys(lastname);
         driver.findElement(By.name("phone")).sendKeys("+48 999999999");
-        driver.findElement(By.name("email")).sendKeys("test@tesergrehyujtyret.pl");
+        driver.findElement(By.name("email")).sendKeys(email);
         driver.findElement(By.name("password")).sendKeys("test123");
         driver.findElement(By.name("confirmpassword")).sendKeys("test123");
         driver.findElement(By.xpath("//button[text()=' Sign Up']")).click();
