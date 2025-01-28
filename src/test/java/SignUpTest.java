@@ -4,24 +4,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-public class SignUpTest {
+public class SignUpTest extends BaseTest{
     @Test
-    public void signUp() {
+    public void signUpTest() {
         String firstname = "Bartek";
         String lastname = "Tester";
         int randomNumber = (int) (Math.random()*1000);
         String email = "tester" + randomNumber + "@test.pl";
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo/");
         driver.findElements(By.xpath("//li[@id='li_myaccount']"))
                 .stream()
                 .filter(WebElement::isDisplayed)
@@ -43,12 +40,7 @@ public class SignUpTest {
         Assert.assertEquals("Hi, " + firstname + " " + lastname, heading.getText());
     }
     @Test
-    public void searchWithNoInformation() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo/");
+    public void searchWithNoInformationTest() {
         driver.findElements(By.xpath("//li[@id='li_myaccount']"))
                 .stream()
                 .filter(WebElement::isDisplayed)
@@ -64,12 +56,7 @@ public class SignUpTest {
                 "The Last Name field is required.");
     }
     @Test
-    public void searchWithWrongEmailAddress() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo");
+    public void searchWithWrongEmailAddressTest() {
         driver.findElements(By.xpath("//li[@id='li_myaccount']"))
                 .stream()
                 .filter(WebElement::isDisplayed)
