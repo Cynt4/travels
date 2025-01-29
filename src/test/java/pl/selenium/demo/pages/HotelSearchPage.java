@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 public class HotelSearchPage {
     @FindBy(id = "s2id_autogen8")
     private WebElement searchHotelSpan;
-    @FindBy(xpath = "//div[@id='select2-drop']//input\")).sendKeys(\"Dubai")
+    @FindBy(xpath = "//div[@id='select2-drop']//input")
     private WebElement searchHotelInput;
     @FindBy(xpath = "//div[@class='select2-result-label']//span")
     private WebElement hotelMatch;
@@ -41,10 +41,16 @@ public class HotelSearchPage {
         checkinOutput.sendKeys(checkout);
     }
 
-    public void setTravellers() {
+    public void setTravellers(int adultsToAdd, int childrenToAdd) {
         travellersInput.click();
-        adultPlusBtn.click();
-        childPlusBtn.click();
+        addTraveler(adultPlusBtn, adultsToAdd);
+        addTraveler(childPlusBtn, childrenToAdd);
+    }
+
+    private void addTraveler(WebElement travelerBtn, int numberOfTravelers) {
+        for (int i = 0; i < numberOfTravelers; i++) {
+            travelerBtn.click();
+        }
     }
 
     public void performSearch() {
