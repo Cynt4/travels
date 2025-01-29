@@ -1,11 +1,10 @@
 package pl.selenium.demo.pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class HotelSearchPage {
     @FindBy(id = "s2id_autogen8")
@@ -26,4 +25,29 @@ public class HotelSearchPage {
     private WebElement childPlusBtn;
     @FindBy(xpath="//button[text()= ' Search']")
     private WebElement searchBtn;
+
+    public HotelSearchPage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+    }
+
+    public void setCity(String cityName) {
+        searchHotelSpan.click();
+        searchHotelInput.sendKeys(cityName);
+        hotelMatch.click();
+    }
+
+    public void setDates(String checkin, String checkout) {
+        checkinInput.sendKeys(checkin);
+        checkinOutput.sendKeys(checkout);
+    }
+
+    public void setTravellers() {
+        travellersInput.click();
+        adultPlusBtn.click();
+        childPlusBtn.click();
+    }
+
+    public void performSearch() {
+        searchBtn.click();
+    }
 }

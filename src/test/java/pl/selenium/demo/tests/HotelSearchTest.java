@@ -1,7 +1,10 @@
+package pl.selenium.demo.tests;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pl.selenium.demo.pages.HotelSearchPage;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,20 +12,12 @@ import java.util.stream.Collectors;
 public class HotelSearchTest extends BaseTest {
     @Test
     public void searchHotelTest() {
-        driver.findElement(By.id("s2id_autogen8")).click();
-        driver.findElement(By.xpath("//div[@id='select2-drop']//input")).sendKeys("Dubai");
-        driver.findElement(By.xpath("//div[@class='select2-result-label']//span")).click();
-        driver.findElement(By.name("checkin")).sendKeys("17/04/2025");
-        driver.findElement(By.name("checkout")).click();
-        driver.findElements(By.xpath("//td[@class='day ' and text()='30']"))
-                .stream()
-                .filter(el -> el.isDisplayed())
-                .findFirst()
-                .ifPresent(el -> el.click());
-        driver.findElement(By.name("travellers")).click();
-        driver.findElement(By.id("adultPlusBtn")).click();
-        driver.findElement(By.id("childPlusBtn")).click();
-        driver.findElement(By.xpath("//button[text()= ' Search']")).click();
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
+        hotelSearchPage.setCity("Dubai");
+        hotelSearchPage.setDates("17/04/2025", "24/04/2025");
+        hotelSearchPage.setTravellers();
+        hotelSearchPage.performSearch();
+
         List<String> hotelNames = driver.findElements(By.xpath("//h4[contains(@class,'list_title')]//b"))
                 .stream()
                 .map(el -> el.getAttribute("textContent"))
