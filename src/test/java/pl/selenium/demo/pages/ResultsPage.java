@@ -13,7 +13,7 @@ public class ResultsPage {
     @FindBy(xpath = "//h4[contains(@class,'list_title')]//b")
     private List<WebElement> hotelList;
 
-    @FindBy(className="itemscontainer")
+    @FindBy(className = "itemscontainer")
     public WebElement resultHeading;
 
     public ResultsPage(WebDriver driver) {

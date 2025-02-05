@@ -14,7 +14,7 @@ public class SignUpTest extends BaseTest {
     public void signUpTest() {
         String firstname = "Bartek";
         String lastname = "Tester";
-        int randomNumber = (int) (Math.random()*1000);
+        int randomNumber = (int) (Math.random() * 1000);
         String email = "tester" + randomNumber + "@test.pl";
 
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
@@ -28,27 +28,12 @@ public class SignUpTest extends BaseTest {
         signUpPage.setPassword("Test123");
         signUpPage.confirmPassword("Test123");
         signUpPage.signUp();
-        LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
-        Assert.assertTrue(loggedUserPage.getHeadingText().contains(lastname));
-        Assert.assertEquals("Hi, " + firstname + " " + lastname, loggedUserPage.getHeadingText());
-    }
-    @Test
-    public void signUpTest2() {
-        String firstname = "Bartek";
-        String lastname = "Tester";
-        int randomNumber = (int) (Math.random()*1000);
-        String email = "tester" + randomNumber + "@test.pl";
-
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.openSignUpForm();
-
-        SignUpPage signUpPage = new SignUpPage(driver);
-        signUpPage.fillSignUpForm(firstname, lastname, "+48 999999999", email, "Test123");
 
         LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
         Assert.assertTrue(loggedUserPage.getHeadingText().contains(lastname));
         Assert.assertEquals("Hi, " + firstname + " " + lastname, loggedUserPage.getHeadingText());
     }
+
     @Test
     public void searchWithNoInformationTest() {
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
@@ -64,6 +49,7 @@ public class SignUpTest extends BaseTest {
         softAssert.assertTrue(errors.contains("The First name field is required."));
         softAssert.assertTrue(errors.contains("The Last Name field is required."));
     }
+
     @Test
     public void searchWithWrongEmailAddressTest() {
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);

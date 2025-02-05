@@ -13,7 +13,7 @@ public class HotelSearchTest extends BaseTest {
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.setCity("Dubai");
         hotelSearchPage.setDates("17/04/2025", "24/04/2025");
-        hotelSearchPage.setTravellers(2,1);
+        hotelSearchPage.setTravellers(2, 1);
         hotelSearchPage.performSearch();
 
         ResultsPage resultsPage = new ResultsPage(driver);
@@ -24,12 +24,13 @@ public class HotelSearchTest extends BaseTest {
         Assert.assertEquals("Rose Rayhaan Rotana", hotelNames.get(2));
         Assert.assertEquals("Hyatt Regency Perth", hotelNames.get(3));
     }
+
     @Test
     public void searchHoteNoResultsTest() {
 
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.setDates("17/04/2025", "24/04/2025");
-        hotelSearchPage.setTravellers(0,1);
+        hotelSearchPage.setTravellers(0, 1);
         hotelSearchPage.performSearch();
 
         ResultsPage resultsPage = new ResultsPage(driver);

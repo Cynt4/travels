@@ -19,18 +19,19 @@ public class HotelSearchPage {
     private WebElement checkinInput;
     @FindBy(name = "checkout")
     private WebElement checkinOutput;
-    @FindBy(name="travellers")
+    @FindBy(name = "travellers")
     private WebElement travellersInput;
-    @FindBy(id="adultPlusBtn")
+    @FindBy(id = "adultPlusBtn")
     private WebElement adultPlusBtn;
-    @FindBy(id="childPlusBtn")
+    @FindBy(id = "childPlusBtn")
     private WebElement childPlusBtn;
-    @FindBy(xpath="//button[text()= ' Search']")
+    @FindBy(xpath = "//button[text()= ' Search']")
     private WebElement searchBtn;
-    @FindBy(xpath="//li[@id='li_myaccount']")
+    @FindBy(xpath = "//li[@id='li_myaccount']")
     private List<WebElement> myAccountLink;
-    @FindBy(xpath="//a[text()='  Sign Up']")
+    @FindBy(xpath = "//a[text()='  Sign Up']")
     private List<WebElement> signUpLink;
+
     public HotelSearchPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
@@ -61,6 +62,7 @@ public class HotelSearchPage {
     public void performSearch() {
         searchBtn.click();
     }
+
     public void openSignUpForm() {
         myAccountLink.stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
         signUpLink.get(1).click();
